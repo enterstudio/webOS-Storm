@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<project name="palm-run" default="jar">
+	<target name="jar">
+		<jar destfile="palm-run.jar" basedir="out/production/palm-run">
+			<manifest>
+				<attribute name="Main-Class" value="com.mojojungle.palmrun.Main"/>
+			</manifest>
+		</jar>
+	</target>
+</project>

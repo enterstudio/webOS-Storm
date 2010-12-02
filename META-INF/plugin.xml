@@ -1,0 +1,58 @@
+<idea-plugin version="2">
+	<name>webOS-Storm</name>
+	<id>com.mojojungle.webosstorm</id>
+	<description>Developer tools for HP webOS developers.</description>
+	<version>1.0</version>
+	<vendor email="j.kovacs@mojojungle.com" url="http://www.mojojungle.com">MojoJungle</vendor>
+	<idea-version since-build="8000"/>
+
+	<application-components>
+		<!-- Add your application components here -->
+	</application-components>
+
+	<project-components>
+		<!-- Add your project components here -->
+	</project-components>
+
+	<actions>
+		<action id="WebOS.NewBasicScene" text="Basic Scene" description="Generate a new basic webOS Scene in this project"
+				icon="/com/mojojungle/webosstorm/icons/new_scene.png" class="com.mojojungle.webosstorm.actions.NewBasicSceneAction"/>
+		<action id="WebOS.NewHelloScene" text="Hello World Scene" description="Generate a new 'Hello World' webOS Scene in this project"
+				icon="/com/mojojungle/webosstorm/icons/new_scene.png" class="com.mojojungle.webosstorm.actions.NewHelloSceneAction"/>
+		<action id="WebOS.NewBasicApp" text="Basic App" description="Generate a new basic webOS App"
+				icon="/com/mojojungle/webosstorm/icons/new_app.png" class="com.mojojungle.webosstorm.actions.NewBasicAppAction"/>
+		<action id="WebOS.NewHelloApp" text="Hello World App" description="Generate a new 'Hello World' webOS App"
+				icon="/com/mojojungle/webosstorm/icons/new_app.png" class="com.mojojungle.webosstorm.actions.NewHelloAppAction"/>
+
+		<group id="WebOS.NewGroup">
+			<separator/>
+			<reference ref="WebOS.NewBasicScene"/>
+			<reference ref="WebOS.NewHelloScene"/>
+			<reference ref="WebOS.NewBasicApp"/>
+			<reference ref="WebOS.NewHelloApp"/>
+
+			<add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFromTemplate"/>
+		</group>
+		
+		<group id="WebOS.ToolBarGenerateGroup" text="Generate" description="Generate webOS components" popup="true"
+			   icon="/com/mojojungle/webosstorm/icons/new_app.png">
+			<reference ref="WebOS.NewBasicScene"/>
+			<reference ref="WebOS.NewHelloScene"/>
+			<separator/>
+			<reference ref="WebOS.NewBasicApp"/>
+			<reference ref="WebOS.NewHelloApp"/>
+			
+			<add-to-group group-id="MainToolBar" anchor="before" relative-to-action="ToolbarFindGroup"/>
+		</group>
+	</actions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<configurationType implementation="com.mojojungle.webosstorm.run.WebOSRunConfigurationType"/>
+		<programRunner implementation="com.mojojungle.webosstorm.run.WebOSProgramRunner"/>
+		<configurationProducer implementation="com.mojojungle.webosstorm.run.WebOSRunConfigurationProducer"/>
+		<iconProvider implementation="com.mojojungle.webosstorm.WebOSIconProvider"/>
+	</extensions>
+
+	<depends>com.intellij.modules.lang</depends>
+
+</idea-plugin>
