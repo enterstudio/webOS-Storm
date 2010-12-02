@@ -5,18 +5,13 @@ import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.filters.TextConsoleBuilder;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
-import com.intellij.execution.impl.RunManagerImpl;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunnerUtil;
-import com.intellij.execution.ui.RunContentManager;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.wm.ToolWindowManager;
 import com.mojojungle.webosstorm.WebOSStorm;
 
 import java.io.File;
@@ -48,7 +43,7 @@ public class WebOSRunningState extends CommandLineState {
 		GeneralCommandLine command = new GeneralCommandLine();
 		command.setExePath("java");
 		command.addParameter("-cp");
-		command.addParameter(getPalmSDKPath()+"/share/jars/webos-tools.jar"+ File.pathSeparatorChar+ palmRunJar.getAbsolutePath());
+		command.addParameter(WebOSStorm.getWebOSToolsJarPath() + File.pathSeparatorChar + palmRunJar.getAbsolutePath());
 		command.addParameter("com.mojojungle.palmrun.Main");
 		command.addParameter(target.getId());
 		command.addParameter(appFolder.getPath());
@@ -59,13 +54,4 @@ public class WebOSRunningState extends CommandLineState {
 		return new OSProcessHandler(command.createProcess(), title);
 	}
 
-	private String getPalmSDKPath() {
-		if(SystemInfo.isWindows)
-			return System.getenv("PalmSDK");
-		else if(SystemInfo.isMac)
-			return "/opt/PalmSDK/Current";
-		else if(SystemInfo.isLinux)
-			return "/opt/PalmSDK";
-		return "/";
-	}
 }

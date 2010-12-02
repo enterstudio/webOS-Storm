@@ -1,6 +1,7 @@
 package com.mojojungle.webosstorm;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 
@@ -58,5 +59,19 @@ public class WebOSStorm {
 		if(parent != null)
 			parentIsResources = parent.getName().equals("resources");
 		return hasAppinfo && !parentIsResources;
+	}
+
+	public static String getPalmSDKPath() {
+		if(SystemInfo.isWindows)
+			return System.getenv("PalmSDK");
+		else if(SystemInfo.isMac)
+			return "/opt/PalmSDK/Current";
+		else if(SystemInfo.isLinux)
+			return "/opt/PalmSDK";
+		return "/";
+	}
+
+	public static String getWebOSToolsJarPath() {
+		return getPalmSDKPath()+"/share/jars/webos-tools.jar";
 	}
 }

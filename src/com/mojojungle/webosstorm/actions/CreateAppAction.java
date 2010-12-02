@@ -11,6 +11,7 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.mojojungle.webosstorm.WebOSStorm;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public abstract class CreateAppAction extends AnAction {
 				try {
 					final String name = form.getName();
 					String path = baseDir.getPath() + File.separator + name;
-					Process process = new ProcessBuilder("cmd", "/c", "palm-generate", "-t", templateName,
+					Process process = new ProcessBuilder("java", "-jar", WebOSStorm.getWebOSToolsJarPath(), "palm-generate", "-t", templateName,
 							"-p", "title=" + form.getAppTitle(),
 							"-p", "id=" + form.getAppID(),
 							"-p", "vendor=" + form.getAppVendor(),
@@ -66,8 +67,12 @@ public abstract class CreateAppAction extends AnAction {
 							}
 						}
 					});
-				} catch (Exception e) {
-					Messages.showErrorDialog(project, "Cannot create new App:\n" + e.getMessage(), "Error");
+				} catch (final Exception e) {
+					ApplicationManager.getApplication().invokeLater(new Runnable() {
+						public void run() {
+							Messages.showErrorDialog(project, "Cannot create new App:\n" + e.getMessage(), "Error");
+						}
+					});
 				}
 			}
 		});

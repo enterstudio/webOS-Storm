@@ -32,7 +32,7 @@ public abstract class CreateSceneAction extends AnAction {
 		}
 		NewSceneDialog dialog = new NewSceneDialog(project, title, file);
 		dialog.show();
-		if(dialog.getExitCode() == 0) {
+		if (dialog.getExitCode() == 0) {
 			NewSceneForm form = dialog.getForm();
 			if (form.getName().trim().length() != 0) {
 				createScene(project, form);
@@ -47,7 +47,8 @@ public abstract class CreateSceneAction extends AnAction {
 				try {
 					final String name = form.getName();
 					final VirtualFile appFolder = form.getSelectedProject();
-					Process process = new ProcessBuilder("cmd", "/c", "palm-generate", "-t", templateName, "-p", "name=" + name, appFolder.getPath()).start();
+					Process process = new ProcessBuilder("java", "-jar", WebOSStorm.getWebOSToolsJarPath(), "palm-generate",
+							"-t", templateName, "-p", "name=" + name, appFolder.getPath()).start();
 					process.waitFor();
 					appFolder.refresh(false, true);
 					ApplicationManager.getApplication().invokeLater(new Runnable() {
@@ -60,9 +61,12 @@ public abstract class CreateSceneAction extends AnAction {
 								FileEditorManager.getInstance(project).openFile(newAssistant, true);
 						}
 					});
-				} catch (Exception e) {
-//					e.printStackTrace();
-					Messages.showErrorDialog(project, "Cannot create new Scene:\n" + e.getMessage(), "Error");
+				} catch (final Exception e) {
+					ApplicationManager.getApplication().invokeLater(new Runnable() {
+						public void run() {
+							Messages.showErrorDialog(project, "Cannot create new Scene:\n" + e.getMessage(), "Error");
+						}
+					});
 				}
 			}
 		});
