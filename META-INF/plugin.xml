@@ -4,7 +4,7 @@
 	<description>Developer tools for HP webOS developers.</description>
 	<version>1.0</version>
 	<vendor email="j.kovacs@mojojungle.com" url="http://www.mojojungle.com">MojoJungle</vendor>
-	<idea-version since-build="8000"/>
+	<idea-version since-build="93.13"/>
 
 	<application-components>
 		<!-- Add your application components here -->
