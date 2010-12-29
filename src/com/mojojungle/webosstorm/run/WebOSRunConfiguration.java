@@ -69,7 +69,7 @@ public class WebOSRunConfiguration extends ModuleBasedConfiguration {
 	}
 
 	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
-		return new WebOSRunningState(executionEnvironment);
+		return new WebOSRunningState(executor, executionEnvironment);
 	}
 
 	@Override

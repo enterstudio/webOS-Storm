@@ -1,8 +1,8 @@
 <idea-plugin version="2">
 	<name>webOS-Storm</name>
 	<id>com.mojojungle.webosstorm</id>
-	<description>Developer tools for HP webOS developers.</description>
-	<version>1.0</version>
+	<description>Developer tools for HP webOS developers. Requires a valid installation of the HP webOS SDK to function properly.</description>
+	<version>1.0.2</version>
 	<vendor email="j.kovacs@mojojungle.com" url="http://www.mojojungle.com">MojoJungle</vendor>
 	<idea-version since-build="93.13"/>
 
