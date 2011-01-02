@@ -64,10 +64,8 @@ public class WebOSStorm {
 	public static String getPalmSDKPath() {
 		if(SystemInfo.isWindows)
 			return System.getenv("PalmSDK");
-		else if(SystemInfo.isMac)
+		else if(SystemInfo.isMac || SystemInfo.isLinux)
 			return "/opt/PalmSDK/Current";
-		else if(SystemInfo.isLinux)
-			return "/opt/PalmSDK";
 		return "/";
 	}
 

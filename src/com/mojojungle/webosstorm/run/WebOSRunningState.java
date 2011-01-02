@@ -5,8 +5,7 @@ import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.filters.TextConsoleBuilder;
-import com.intellij.execution.filters.TextConsoleBuilderFactory;
+import com.intellij.execution.filters.*;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
@@ -16,6 +15,7 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
@@ -24,6 +24,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
 import com.mojojungle.webosstorm.WebOSStorm;
 
+import java.awt.*;
 import java.io.File;
 
 public class WebOSRunningState extends CommandLineState {
@@ -89,6 +90,7 @@ public class WebOSRunningState extends CommandLineState {
 		processHandler.putUserData(WEB_OS_RUN_CONFIGURATION_KEY, config);
 		final boolean finalAppAlreadyRunning = appAlreadyRunning;
 		processHandler.addProcessListener(new ProcessAdapter() {
+
 			@Override
 			public void processTerminated(ProcessEvent event) {
 				if (finalAppAlreadyRunning) {
