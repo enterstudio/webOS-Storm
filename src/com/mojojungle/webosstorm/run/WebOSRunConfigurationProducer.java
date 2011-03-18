@@ -1,9 +1,9 @@
 package com.mojojungle.webosstorm.run;
 
 import com.intellij.execution.Location;
+import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.impl.RunManagerImpl;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
 import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
@@ -27,7 +27,7 @@ public class WebOSRunConfigurationProducer extends RuntimeConfigurationProducer 
 	}
 
 	@Override
-	protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext configurationContext) {
+	protected RunnerAndConfigurationSettings createConfigurationByElement(Location location, ConfigurationContext configurationContext) {
 //		Logger log = Logger.getInstance("#com.mojojungle.webosstorm");
 //		log.setLevel(Level.INFO);
 		
@@ -77,7 +77,9 @@ public class WebOSRunConfigurationProducer extends RuntimeConfigurationProducer 
 
 	@Override
 	public RuntimeConfigurationProducer clone() {
-		return new WebOSRunConfigurationProducer();
+		WebOSRunConfigurationProducer producer = new WebOSRunConfigurationProducer();
+		producer.isClone = true;
+		return producer;
 	}
 
 	public int compareTo(Object o) {
