@@ -8,9 +8,9 @@
     <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library>
+      <library name="webOS SDK 2.0">
         <CLASSES>
-          <root url="jar://C:/Program Files (x86)/Palm/SDK/share/jars/webos-tools.jar!/" />
+          <root url="jar://F:/SDK2.0/program files/Palm/SDK/share/jars/webos-tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -14,6 +14,4 @@ public class WebOSProgramRunner extends DefaultProgramRunner {
 	public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
 		return profile instanceof WebOSRunConfiguration;
 	}
-
-	
 }

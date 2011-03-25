@@ -61,12 +61,14 @@ public class WebOSRunningState extends CommandLineState {
 //		RunContentDescriptor d = allDescriptors[0];
 		ProcessHandler[] runningProcesses = ExecutionManager.getInstance(project).getRunningProcesses();
 		for (ProcessHandler process : runningProcesses) {
-			WebOSRunConfiguration data = process.getUserData(WEB_OS_RUN_CONFIGURATION_KEY);
-			if (data != null) {
-				if (data.equals(config)) {
-					appAlreadyRunning = true;
-					if (data.LOGGING) {
-						loggingEnabled = false;
+			if (!process.isProcessTerminated()) {
+				WebOSRunConfiguration data = process.getUserData(WEB_OS_RUN_CONFIGURATION_KEY);
+				if (data != null) {
+					if (data.equals(config)) {
+						appAlreadyRunning = true;
+						if (data.LOGGING) {
+							loggingEnabled = false;
+						}
 					}
 				}
 			}
@@ -83,6 +85,7 @@ public class WebOSRunningState extends CommandLineState {
 		command.addParameter(target.getId());
 		command.addParameter(appFolder.getPath());
 		command.addParameter("log=" + loggingEnabled);
+		command.addParameter("use-v1="+config.USE_V1_FORMAT);
 
 		String configName = this.getRunnerSettings().getRunProfile().getName();
 		String title = "Run '" + configName + "' on " + target;// + " (" + command.getCommandLineString() + ")";
@@ -94,7 +97,8 @@ public class WebOSRunningState extends CommandLineState {
 			@Override
 			public void processTerminated(ProcessEvent event) {
 				if (finalAppAlreadyRunning) {
-					RunContentDescriptor contentDescriptor = ExecutionManager.getInstance(executionEnvironment.getProject()).getContentManager().findContentDescriptor(executor, event.getProcessHandler());
+					RunContentDescriptor contentDescriptor = ExecutionManager.getInstance(executionEnvironment.getProject()).
+							getContentManager().findContentDescriptor(executor, event.getProcessHandler());
 					if (contentDescriptor != null) {
 						final Content content = contentDescriptor.getAttachedContent();
 						ApplicationManager.getApplication().invokeLater(new Runnable() {

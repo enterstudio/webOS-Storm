@@ -28,6 +28,7 @@ public class WebOSRunConfiguration extends ModuleBasedConfiguration {
 	private RunTarget target = RunTarget.EMULATOR;
 	private VirtualFile appFolder = null;
 	public boolean LOGGING = true;
+	public boolean USE_V1_FORMAT = false;
 
 	public WebOSRunConfiguration(Project project, WebOSConfigurationFactory factory) {
 		super(project.getName(), new RunConfigurationModule(project), factory);

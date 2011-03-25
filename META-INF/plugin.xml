@@ -1,13 +1,27 @@
-<idea-plugin version="2">
+<idea-plugin version="2" url="http://www.mojojungle.com/webos-storm">
 	<name>webOS-Storm</name>
 	<id>com.mojojungle.webosstorm</id>
-	<description>Developer tools for HP webOS developers. Requires a valid installation of the HP webOS SDK to function properly.</description>
-	<version>1.0.3</version>
+	<description>Developer tools for HP webOS developers. Requires a valid installation of the HP webOS SDK 2.1 to function properly.</description>
+	<version>1.1</version>
+	<change-notes><![CDATA[
+			<ul>
+			<li>1.1
+				<ul>
+					<li>Compatability with WebIDE 2.0 and webOS SDK 2.1</li>
+				</ul>
+			</li>
+			</ul>
+			]]></change-notes>
 	<vendor email="j.kovacs@mojojungle.com" url="http://www.mojojungle.com">MojoJungle</vendor>
-	<idea-version since-build="93.13"/>
+
+	<!-- successfully tested with IDEA 10 and PhpStorm 2.0 only -->
+	<idea-version since-build="99.18"/>
 
 	<application-components>
 		<!-- Add your application components here -->
+		<!--<component>-->
+			<!--<implementation-class>com.mojojungle.webosstorm.MainApplicationComponent</implementation-class>-->
+		<!--</component>-->
 	</application-components>
 
 	<project-components>
